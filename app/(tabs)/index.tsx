@@ -16,7 +16,7 @@ import {
 // Seus dados estão aqui e você pode editá-los
 const userData = {
   nome: "Lívia Ariane Frazão da Silva",
-  fotoUrl: "https://media.licdn.com/dms/image/v2/D4D03AQHH3Eg6773iYQ/profile-displayphoto-shrink_800_800/B4DZQ9vwwbHMAc-/0/1736202719376?e=1749081600&v=beta&t=jzK_h1ichtyFIZO71BTu1ks4oAHFKcB-0QAXmIx-fM8",
+  fotoUrl: require('../../assets/images/minhafoto.jpeg'),
   resumo: "Estudante de Análise e Desenvolvimento de Sistemas da Faculdade Senac, tenho interesse em atuar na área de desenvolvimento de software.",
   contato: {
     telefone: "(81)99353-4349",
@@ -42,18 +42,18 @@ const userData = {
 };
 
 // Função auxiliar para abrir links
-const openLink = (url) => {
+const openLink = (url: string) => {
   Linking.openURL(url).catch((err) => console.error('Não foi possível abrir o link', err));
 };
 
 const SectionDivider = () => <View style={styles.sectionDivider} />;
 
 // Componente para o ícone de rede social
-const SocialIcon = ({ url, iconUrl, altText }) => (
+const SocialIcon = ({ url, iconUrl, altText }: { url: string, iconUrl: string, altText: string }) => (
   <TouchableOpacity onPress={() => openLink(url)} style={styles.socialButton}>
-    <Image 
-      source={{ uri: iconUrl }} 
-      style={styles.socialIcon} 
+    <Image
+      source={{ uri: iconUrl }}
+      style={styles.socialIcon}
       accessibilityLabel={altText}
     />
   </TouchableOpacity>
@@ -71,15 +71,15 @@ function App() {
 
   return (
     <ScrollView style={styles.container}>
-      
+
       {/* -------------------- CABEÇALHO -------------------- */}
       <View style={styles.header}>
         <Text style={styles.name}>{userData.nome}</Text>
-        <Image 
-          source={{ uri: userData.fotoUrl }} 
+        <Image
+          source={userData.fotoUrl}
           style={styles.profileImage}
           // Fallback para caso a imagem não carregue
-          onError={() => console.log('Erro ao carregar imagem de perfil')} 
+          onError={() => console.log('Erro ao carregar imagem de perfil')}
         />
       </View>
 
@@ -105,12 +105,12 @@ function App() {
 
         {/* Links Sociais */}
         <View style={styles.socialContainer}>
-          <SocialIcon 
+          <SocialIcon
             url={userData.contato.linkedinUrl}
             iconUrl="https://cdn-icons-png.flaticon.com/512/174/174857.png"
             altText="LinkedIn"
           />
-          <SocialIcon 
+          <SocialIcon
             url={userData.contato.githubUrl}
             iconUrl="https://cdn-icons-png.flaticon.com/512/25/25231.png"
             altText="GitHub"
@@ -170,38 +170,38 @@ function App() {
       {/* -------------------- FORMULÁRIO DE CONTATO (SIMPLIFICADO) -------------------- */}
       <View style={[styles.section, { marginBottom: 20 }]}>
         <Text style={styles.sectionTitle}>Formulário de Contato</Text>
-        
+
         <Text style={styles.formLabel}>Nome:</Text>
-        <TextInput 
-          style={styles.input} 
-          placeholder="Seu Nome" 
-          onChangeText={setFormName} 
+        <TextInput
+          style={styles.input}
+          placeholder="Seu Nome"
+          onChangeText={setFormName}
           value={formName}
         />
 
         <Text style={styles.formLabel}>Email:</Text>
-        <TextInput 
-          style={styles.input} 
-          placeholder="seu@email.com" 
-          onChangeText={setFormEmail} 
+        <TextInput
+          style={styles.input}
+          placeholder="seu@email.com"
+          onChangeText={setFormEmail}
           value={formEmail}
           keyboardType="email-address"
         />
 
         <Text style={styles.formLabel}>Mensagem (Exemplo de Área de Texto):</Text>
-        <TextInput 
-          style={[styles.input, styles.textArea]} 
+        <TextInput
+          style={[styles.input, styles.textArea]}
           multiline
           numberOfLines={4}
           placeholder="Sua mensagem..."
         />
-        
+
         {/* Usando o componente Button nativo para Simulação de Envio */}
         <View style={{ marginTop: 20 }}>
-          <Button 
-            title="Enviar Contato" 
-            onPress={handleSubmit} 
-            color={Platform.OS === 'ios' ? '#1f2937' : '#3b82f6'} 
+          <Button
+            title="Enviar Contato"
+            onPress={handleSubmit}
+            color={Platform.OS === 'ios' ? '#1f2937' : '#3b82f6'}
           />
         </View>
       </View>
@@ -216,7 +216,7 @@ function App() {
   );
 }
 
-export default App; 
+export default App;
 
 
 // -------------------- ESTILOS REACT NATIVE --------------------
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f4f4f4',
     // Adicionando um padding superior para o StatusBar no Android/iOS
-    paddingTop: Platform.OS === 'android' ? 30 : 0, 
+    paddingTop: Platform.OS === 'android' ? 30 : 0,
   },
   header: {
     alignItems: 'center',
